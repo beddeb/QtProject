@@ -1,2 +1,2 @@
 # QtProject
-Scary, SOO SCARY
+Scary, SOOO SCARY
