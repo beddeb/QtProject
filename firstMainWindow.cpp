@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -7,22 +6,39 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //Создаем объект класса QAction c названием quit
-    QAction *quit = new QAction("&Quit", this);
+    QPixmap newpix("-");
+    QPixmap openpix("-");
+    QPixmap quitpix("-");
 
-    //Создаем объект класса Qmenu
+    QAction *newa = new QAction(newpix, "&New", this);
+    QAction *open = new QAction(openpix, "&Open", this);
+    QAction *quit = new QAction(quitpix, "&Shutdown", this);
+
+    m_button = new QPushButton("Get Brain", this);
+    m_button->setGeometry(QRect(QPoint(100, 100), QSize(200, 50)));
+
+    quit->setShortcut(tr("CTRL+Q"));
+
     QMenu *file;
     file = menuBar()->addMenu("&File");
-
-    //Помещаем наше действие в наш виджет qmain с помощью метода addaction()
+    file->addAction(newa);
+    file->addAction(open);
+    file->addSeparator();
     file->addAction(quit);
 
-    //Когда выбираем quit, срабатывает триггер выхода QApplication::quit
-    connect(quit, &QAction::triggered, qApp, QApplication::quit);
+    qApp->setAttribute(Qt::AA_DontShowIconsInMenus, false);
+
+    connect(quit, &QAction::triggered, qApp, &QApplication::quit);
+    connect(m_button, SIGNAL (released()), this, SLOT (handleButton()));
+}
+
+void MainWindow::handleButton(){
+
+    m_button->setText("Buy NoRender");
+    m_button->resize(100, 100);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
