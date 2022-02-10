@@ -6,12 +6,12 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     MainWindow w;
 
-    w.resize(500, 500);
-    w.setWindowTitle("Test Menu");
+    w.resize(400, 400);
+    w.setWindowTitle("GitHub");
 
     w.show();
-    return a.exec();
+    return app.exec();
 }
